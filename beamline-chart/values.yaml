@@ -1,14 +1,14 @@
-# default values for all IOCs on bl45p
+# default values for all IOCs on bl38p
 # see end of file for values that may be overriden per individual IOC
 
-beamline: bl45p
-serviceAccount: bl45p-priv
+beamline: bl38p
+serviceAccount: bl38p-priv
 
 # useHostNetwork - use host network for IOC - required for Channel Access
 # to work outside of the cluster
 hostNetwork: true
 
-# useAffinity - only run on nodes with label beamline:bl45p
+# useAffinity - only run on nodes with label beamline:bl38p
 useAffinity: true
 
 # root folder for ioc source/binaries inside generic IOC container
