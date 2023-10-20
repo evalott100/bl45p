@@ -2,14 +2,19 @@
 # see end of file for values that may be overriden per individual IOC
 
 beamline: bl38p
-serviceAccount: bl38p-priv
+# we use the default service account in the namespace so leave this out
+# if you need to specify an alternative then uncomment below
+# serviceAccountName: k8s-p38-iocs
 
 # useHostNetwork - use host network for IOC - required for Channel Access
 # to work outside of the cluster
 hostNetwork: true
 
-# useAffinity - only run on nodes with label beamline:bl38p
-useAffinity: true
+# useAffinity - only run on nodes with label beamline:bl45p
+# Not using this now that we have cluster per beamline
+# However if you are using one cluster for multiple beamlines / domains
+# Then label the local nodes for each beamline and switch to true
+useAffinity: false
 
 # root folder for ioc source/binaries inside generic IOC container
 iocFolder: /epics/ioc
@@ -58,6 +63,10 @@ dataVolume:
   pvc: true
   # A path on the host machine to write data into, ignored if dataVolume.pvc is true
   hostPath: ""
+
+# use the shared PV for publishing opi files over http (see services/opis)
+opisClaim: bl38p-opis-opi-claim
+
 
 # default resource limits
 resources:

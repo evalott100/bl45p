@@ -1,0 +1,5 @@
+# use nginx for publishing opi files over http
+image: docker.io/library/nginx:latest
+beamline: bl38p
+namespace: bl38p-iocs
+
