@@ -10,7 +10,7 @@ tmpvenv=$(mktemp -d)
 python3 -mvenv ${tmpvenv}
 source ${tmpvenv}/bin/activate
 
-# setup environment for epics-containers-cli (ec) to work with BL45P
+# setup environment for epics-containers-cli (ec) to work with this domain
 source ${THIS_DIR}/environment.sh
 
 for ioc in iocs/*

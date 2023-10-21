@@ -18,11 +18,11 @@ python -m venv ~/.local/epics-containers
 source ~/.local/epics-containers/bin/activate
 ```
 
-2. Set up your environment for BL45P
+2. Set up your environment for for this beamline
 
 ```bash
-# get bl45p environment file
-curl https://raw.githubusercontent.com/epics-containers/bl38p/main/environment.sh -o ~/.local/bin/bl45p
+# get domain environment file
+curl https://raw.githubusercontent.com/epics-containers/bl38p/main/environment.sh -o ~/.local/bin/bl38p
 
 # set up the environment
 ~/.local/bl38p

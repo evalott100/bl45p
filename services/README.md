@@ -2,9 +2,9 @@ Shared Helm Charts
 ==================
 
 The services described in helm charts in this folder should be installed
-once per beamline or accelerator domain. At present these are only versioned
-via the appVersion and Version fields in Chart.yaml and these values should
-be updated manually when changing these charts.
+once per beamline or accelerator domain. We use a separate helm chart per
+domain to allow customization and so that the entire definition of the
+beamline / domain is in a single repository.
 
 Current charts are:
 
@@ -22,3 +22,17 @@ Current charts are:
 - opis: installs the web server that shares the engineering screens published
   by each IOC. The structure is two deep only: IOC names as folders at the root
   containing all the IOCs OPI files in a flat list.
+
+Deploy these charts to the beamline cluster using by setting up your cluster
+and namespace connection using environment.sh and then executing
+the following commands:
+
+```bash
+helm upgrade --install shared service/shared
+help upgrade --install opis service/opis
+```
+
+At present these helm charts are only versioned
+via the appVersion and Version fields in Chart.yaml and these values should
+be updated manually when changing these charts.
+

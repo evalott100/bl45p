@@ -1,5 +1,5 @@
 # default values for all IOCs on bl38p
-# see end of file for values that may be overriden per individual IOC
+# see end of file for values that may be overridden per individual IOC
 
 beamline: bl38p
 # we use the default service account in the namespace so leave this out
@@ -10,7 +10,7 @@ beamline: bl38p
 # to work outside of the cluster
 hostNetwork: true
 
-# useAffinity - only run on nodes with label beamline:bl45p
+# useAffinity - only run on nodes with label beamline:<beamline-name>
 # Not using this now that we have cluster per beamline
 # However if you are using one cluster for multiple beamlines / domains
 # Then label the local nodes for each beamline and switch to true
@@ -37,8 +37,8 @@ globalenv:
 # reasonable defaults for securityContext
 securityContext:
   allowPrivilegeEscalation: false
-  runAsUser: 37143
-  runAsGroup: 37143
+  # runAsUser: 37143
+  # runAsGroup: 37143
   # capabilities:
   #   drop:
   #   - ALL
@@ -55,11 +55,13 @@ securityContext:
 # template
 image:
 
-# Somewhere to mount at /data if needed
+# a volume to mount for writing data to. This can be a PVC or a hostPath
+# the PVC
 dataVolume:
-  # A PVC to write data into
+  # Create a PVC called {{ .Chart.Name }}-data when true
   pvc: false
-  # A path on the host machine to write data into, ignored if dataVolume.pvc is true
+  # A path on the host machine to write data into. Also used as the path that the
+  # pvc or hostPath will be mounted at
   hostPath: /dls/p38/data/
 
 # use the shared PVC for publishing opi files over http (see services/opis)
