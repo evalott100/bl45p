@@ -83,7 +83,7 @@ spec:
         {{- end }}
         {{- if or (.Values.dataVolume.pvc) (.Values.dataVolume.hostPath)  }}
         - name: {{ .Chart.Name }}-data
-          mountPath: /data
+          mountPath: {{ .Values.dataVolume.hostPath }}
           {{- if .Values.dataVolume.hostPath }}
           mountPropagation: HostToContainer
           {{- end}}

@@ -1,5 +1,5 @@
 # use nginx for publishing opi files over http
-image: docker.io/library/nginx:latest
+image: docker.io/nginxinc/nginx-unprivileged:stable-bullseye-perl
 beamline: bl38p
-namespace: bl38p-iocs
+namespace: p38-iocs
 

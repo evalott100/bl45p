@@ -13,7 +13,7 @@ echo "Loading IOC environment for BL38P ..."
 # a mapping between genenric IOC repo roots and the related container registry
 export EC_REGISTRY_MAPPING='github.com=ghcr.io gitlab.diamond.ac.uk=gcr.io/diamond-privreg/controls/ioc'
 # the namespace to use for kubernetes deployments
-export EC_K8S_NAMESPACE=bl38p-iocs
+export EC_K8S_NAMESPACE=p38-iocs
 # the git organisation used for beamline repositories
 export EC_GIT_ORG=https://github.com/epics-containers
 # the git repo for this beamline (or accelerator domain)
@@ -30,6 +30,8 @@ if module --version &> /dev/null; then
     if module avail k8s-p38 > /dev/null; then
         module unload k8s-p38 > /dev/null
         module load k8s-p38 > /dev/null
+        # set the default namespace for kubectl and helm (for convenience only)
+        kubectl config set-context --current --namespace=p38-iocs
     fi
 fi
 
@@ -47,3 +49,6 @@ fi
 
 # enable shell completion for ec commands
 source <(ec --show-completion ${SHELL})
+# list the running iocs - this command makes sure the user has provided credentials
+ec ps
+

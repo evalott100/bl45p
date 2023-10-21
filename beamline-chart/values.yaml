@@ -37,12 +37,13 @@ globalenv:
 # reasonable defaults for securityContext
 securityContext:
   allowPrivilegeEscalation: false
+  runAsUser: 37143
+  runAsGroup: 37143
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
-  # runAsUser: 1000
 
 ########################################################################################
 # The following values are expected to be overridden in individual IOC values.yaml
@@ -54,19 +55,17 @@ securityContext:
 # template
 image:
 
-# provide a PVC for autosave
-autosave: true
-
 # Somewhere to mount at /data if needed
 dataVolume:
   # A PVC to write data into
-  pvc: true
+  pvc: false
   # A path on the host machine to write data into, ignored if dataVolume.pvc is true
-  hostPath: ""
+  hostPath: /dls/p38/data/
 
-# use the shared PV for publishing opi files over http (see services/opis)
-opisClaim: bl38p-opis-opi-claim
-
+# use the shared PVC for publishing opi files over http (see services/opis)
+opisClaim: bl38p-opi-claim
+# use the shared PVC autosave files (comment out for no autosave)
+autosaveClaim: bl38p-autosave-claim
 
 # default resource limits
 resources:
