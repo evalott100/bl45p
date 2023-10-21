@@ -28,16 +28,6 @@ export EC_LOG_URL='https://graylog2.diamond.ac.uk/search?rangetype=relative&fiel
 # enable debug output in all 'ec' commands
 # export EC_DEBUG=1
 
-# the following configures kubernetes inside DLS.
-if module --version &> /dev/null; then
-    if module avail k8s-p38 > /dev/null; then
-        module unload k8s-p38 > /dev/null
-        module load k8s-p38 > /dev/null
-        # set the default namespace for kubectl and helm (for convenience only)
-        kubectl config set-context --current --namespace=p38-iocs
-    fi
-fi
-
 # check if epics-containers-cli (ec command) is installed and install if not
 if ! ec --version &> /dev/null; then
     # must be in a venv and this is the reliable check
@@ -52,6 +42,17 @@ fi
 
 # enable shell completion for ec commands
 source <(ec --show-completion ${SHELL})
-# list the running iocs - this command makes sure the user has provided credentials
-ec ps
+
+# the following configures kubernetes inside DLS.
+if module --version &> /dev/null; then
+    if module avail k8s-p38 > /dev/null; then
+        module unload k8s-p38 > /dev/null
+        module load k8s-p38 > /dev/null
+        # set the default namespace for kubectl and helm (for convenience only)
+        kubectl config set-context --current --namespace=p38-iocs
+        # get running iocs: makes sure the user has provided credentials
+        ec ps
+    fi
+fi
+
 
