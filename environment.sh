@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# a bash script to source in order to set up your command line to interact with
+# a specific beamline. This needs to be customized per beamline / domain
+
 # check we are sourced
 if [ "$0" = "$BASH_SOURCE" ]; then
     echo "ERROR: Please source this script"
