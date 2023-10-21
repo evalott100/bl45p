@@ -37,7 +37,6 @@ spec:
       containers:
         - name: server
           image: {{ .Values.image }}
-          entrypoint: bash
           resources:
             requests:
               memory: 100Mi
@@ -71,7 +70,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   sessionAffinity: None
   selector:
     app: {{ .Chart.Name }}
